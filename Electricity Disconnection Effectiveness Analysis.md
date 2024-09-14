@@ -33,16 +33,16 @@ Following key insights are found during analysis:
 ### 2. Ineffective Disconnection Duration: 
 The average disconnection duration was only 2 hours, which appears to be too short to effectively prompt customer payment.
 
-### 3 Cluster Imbalance: 
+### 3. Cluster Imbalance: 
 50% of the disconnection efforts were concentrated in one out of nine clusters, suggesting the need for a more balanced approach across all clusters.
 
-### 4 End-of-Month Surge: 
+### 4. End-of-Month Surge: 
 Disconnection attempts showed a gradual increase towards the end of the month. A more evenly distributed schedule throughout the month would improve operational efficiency.
 
-### 5 Nighttime Disconnections: 
+### 5. Nighttime Disconnections: 
 A majority of disconnections were performed during the night.
 
-### 6 Quarterly Patterns: 
+### 6. Quarterly Patterns: 
 The highest number of disconnections occurred in Q3 and Q4, highlighting the need to review seasonal trends and plan accordingly.
 
 
