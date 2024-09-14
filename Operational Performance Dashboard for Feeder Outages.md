@@ -1,0 +1,67 @@
+# Operational Performance Dashboard for Feeder Outages
+
+
+## Objective
+
+Developed a Power BI dashboard to track and compare operational performance metrics for the current year (FY-25) against the previous year (FY-24) on a daily basis. The dashboard categorizes feeder outages into faults, planned shutdowns, and unplanned shutdowns. Additionally, it provides insights into the top 5 fault types.
+
+
+## Data Source & Processing:
+- Data was sourced from offline `.csv` files, extracted from the company database.
+- Power Query was used to append and clean the data.
+- Multiple DAX measures were created to facilitate the analysis, including counts of outages, faults, planned/unplanned shutdowns, and percentage differences between the two fiscal years.
+
+
+### Some of Power Query steps:
+
+
+![image](https://github.com/user-attachments/assets/13eb28b8-5891-4e92-96af-0404feb5257c)
+
+
+## Some of Key Measures (DAX):
+- **CY Outages (FY-25)**: 
+   ```DAX
+   CALCULATE(COUNT('Outages FY-25'[Outage Id]), 'Outages FY-25'[HT Closing Sub Type] <> "RC/DC Operation", 'Outages FY-25'[FY] = "FY-25")
+   ```
+
+- **CY Planned Shutdowns (FY-25)**: 
+   ```DAX
+   CALCULATE(COUNT('Outages FY-25'[Outage Id]), 'Outages FY-25'[HT Closing Type] IN {"Grid Planned Outage", "Operation"}, 'Outages FY-25'[FY] = "FY-25")
+   ```
+- **CY Reasons (FY-25)**:
+    ```DAX
+    CALCULATE(COUNT('Outages FY-25'[HT fault reason]),  'Outages FY-25'[FY] = "FY-25")
+ 
+- **LY Faults (FY-24)**: 
+   ```DAX
+   CALCULATE(COUNT('Outages FY-25'[Outage Id]), ALL('Outages FY-25'), 'Outages FY-25'[HT Closing Type] IN {"Fault", "Transient", "Non-Transient"}, SAMEPERIODLASTYEAR('Outages FY-25'[Start date]))
+   ```
+
+- **LY Planned Shutdowns (FY-24)**: 
+   ```DAX
+   CALCULATE(COUNT('Outages FY-25'[Outage Id]), ALL('Outages FY-25'), 'Outages FY-25'[HT Closing Type] IN {"Grid Planned Outage", "Operation"}, SAMEPERIODLASTYEAR('Outages FY-25'[Start date]))
+   ```
+
+- **Percentage Difference in Faults**: 
+   ```DAX
+   ([LY faults] - [CY outages]) / [LY faults]
+   ```
+
+### 
+
+![image](https://github.com/user-attachments/assets/aef95ea0-059d-45e8-9369-ffad8feb37ad)
+
+### Dashboard Snapshot
+![Untitled 6](https://github.com/user-attachments/assets/261ba949-f0b1-4cfb-90fb-73084fea0f04)
+
+
+
+
+## Features:
+- **Day-to-day tracking**: Allows comparison of current year (CY) and last year (LY) outages, categorized by fault type, planned, and unplanned shutdowns.
+- **Top 5 Faults**: Displays the most frequent faults to prioritize maintenance and resolution efforts.
+- **Dynamic Filters**: Users can filter data by date, outage type, and specific time periods for more granular analysis.
+- **Interactive Visuals**: Offers intuitive insights into the difference in outage frequencies and reasons between the two fiscal years.
+
+## Conclusion:
+This dashboard provides a comprehensive view of feeder outage performance across multiple dimensions. It enables stakeholders to quickly assess operational performance, identify inefficiencies, and make data-driven decisions to improve grid reliability and reduce downtime.
